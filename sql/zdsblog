@@ -1,0 +1,41 @@
+create database if not exists zdsblog;
+
+use zdsblog;
+
+# insert into users (id, user_name, nick_name, password, email, description, expire_time, create_time, update_time, deleted)
+# values (null, 'zhangds', 'zhangds', '', '', '', '', '', '', false);
+
+alter table users add status varchar(12);
+
+create table IF NOT EXISTS moudle (
+    moudle_id integer primary key auto_increment,
+    moudle_name varchar(20) comment '模块名称',
+    permission varchar(20) comment '模块权限'
+);
+
+create table IF NOT EXISTS role (
+    id integer primary key auto_increment,
+    role_code varchar(12) comment '角色编码',
+    role_name varchar(20) comment '角色名称'
+);
+
+# alter table role change role_id id INTEGER;
+# alter table role add role_code varchar(12);
+
+insert into role (id, role_code, role_name) values (null, 'admin', '管理员');
+insert into role (role_code, role_name) values ('default', '普通用户');
+insert into role (id, role_code, role_name) values (null, 'vip', '会员');
+
+
+create table IF NOT EXISTS role_moudle (
+    id integer primary key auto_increment,
+    role_id integer,
+    moudle_id integer
+);
+
+create table IF NOT EXISTS user_role (
+    id integer primary key auto_increment,
+    role_id integer,
+    user_id integer
+);
+
