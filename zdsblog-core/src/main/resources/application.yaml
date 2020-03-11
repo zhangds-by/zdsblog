@@ -1,0 +1,124 @@
+server:
+  port: 9986
+
+spring:
+  security:
+    basic:
+      path: /swagger-ui.html
+      enabled: true
+    user:
+      password: admin
+      name: admin
+  datasource:
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #高版本的mysql需要配置时区serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/zdsblog?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+
+  #文件上传
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      location: /tmp
+      file-size-threshold: 5MB
+      enabled: true
+      max-request-size: 100MB
+
+  #定时任务配置
+  quartz:
+    wait-for-jobs-to-complete-on-shutdown: true
+    #quartz第一次启动时需要初始化，使用always，之后使用never
+    jdbc:
+      initialize-schema: never
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          jobStore:
+            acquireTriggersWithinLock: true
+            misfireThreshold: 5000
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+          threadPool:
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+            class: org.quartz.simpl.SimpleThreadPool
+
+    # 服务模块
+    devtools:
+      restart:
+        # 热部署开关
+        enabled: false
+    # redis 配置
+    redis:
+      # 地址
+      host: localhost
+      # 端口，默认为6379
+      port: 6379
+      # 密码
+      password:
+      # 连接超时时间
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池中的最小空闲连接
+          min-idle: 0
+          # 连接池中的最大空闲连接
+          max-idle: 8
+          # 连接池的最大数据库连接数
+          max-active: 8
+          # #连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+
+  #jpa配置
+  jpa:
+    hibernate:
+      show-sql: true
+      open-in-view: false
+      ddl-auto: update
+
+  #rabbitMQ配置
+  rabbitmq:
+    password: guest
+    port: 5672
+    host: localhost
+    # 手动提交消息
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+    virtual-host: /
+    username: guest
+
+
+blog:
+  security:
+    # 免认证静态资源路径
+    anon-resources-url:
+    code:
+      image:
+        create-url: /image/code
+        length: 6
+        width: 148
+        login-processing-url: /login
+        expire-in: 60
+        url: /test/img/code
+        height: 36
+    session:
+      maximum-sessions: 1
+    remember-me-timeout: 3600
+    logout-url: /logout
+    index-url: /index
+    # 登录路径
+    login-url: /login
+
+    #jwt配置
+    jwt:
+      token-header: Authorization
+      token-prefix: Auth-
+      expiration: 86400
+      secret: JWTSecret
+      ant-matchers: /*.html,/**/*.html,/**/*.css,/**/*.js,/webSocket/**,image/code,/index/**,/swagger-ui.html,/swagger-resources/**,/webjars/**,/*/api-docs
