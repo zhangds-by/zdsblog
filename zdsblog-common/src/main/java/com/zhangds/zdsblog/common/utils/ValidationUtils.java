@@ -1,5 +1,8 @@
 package com.zhangds.zdsblog.common.utils;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.zhangds.zdsblog.common.exception.GlobalRequestException;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
@@ -26,8 +29,6 @@ public class ValidationUtils {
 
     /**
      * Gets validator, or create it.
-     *
-     * @return validator
      */
     @NonNull
     public static Validator getValidatorOrCreate() {
@@ -43,10 +44,6 @@ public class ValidationUtils {
 
     /**
      * Validates bean by hand.
-     *
-     * @param obj    bean to be validated
-     * @param groups validation group
-     * @throws ConstraintViolationException throw if validation failure
      */
     public static void validate(Object obj, Class<?>... groups) {
 
@@ -97,4 +94,22 @@ public class ValidationUtils {
         fieldErrors.forEach(filedError -> errMap.put(filedError.getField(), filedError.getDefaultMessage()));
         return errMap;
     }
+
+    /**
+     * 验证空
+     */
+    public static void isNull(Object obj, String entity, String parameter , Object value){
+        if(ObjectUtil.isNull(obj)){
+            String msg = entity + " 不存在: "+ parameter +" is "+ value;
+            throw new GlobalRequestException(msg);
+        }
+    }
+
+    /**
+     * 验证是否为邮箱
+     */
+    public static boolean isEmail(String email) {
+        return new EmailValidator().isValid(email, null);
+    }
+
 }

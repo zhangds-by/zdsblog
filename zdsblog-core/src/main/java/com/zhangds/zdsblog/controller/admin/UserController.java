@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("user")
-@Api(tags = "UserController", value = "用户信息管理")
+@Api(tags = "用户信息管理")
 public class UserController extends BaseController {
 
     @Autowired

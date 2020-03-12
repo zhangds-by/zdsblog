@@ -1,4 +1,4 @@
-package com.zhangds.zdsblog.common.utils;
+package com.zhangds.zdsblog.common.utils.http;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -31,12 +31,6 @@ public class HttpClientUtils {
 
     /**
      * Creates https client.
-     *
-     * @param timeout connection timeout (ms)
-     * @return https client
-     * @throws KeyStoreException        key store exception
-     * @throws NoSuchAlgorithmException no such algorithm exception
-     * @throws KeyManagementException   key management exception
      */
     @NonNull
     public static CloseableHttpClient createHttpsClient(int timeout) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
@@ -53,9 +47,6 @@ public class HttpClientUtils {
 
     /**
      * Gets request config.
-     *
-     * @param timeout connection timeout (ms)
-     * @return request config
      */
     private static RequestConfig getReqeustConfig(int timeout) {
         return RequestConfig.custom()
@@ -68,8 +59,6 @@ public class HttpClientUtils {
 
     /**
      * Multipart file resource.
-     *
-     * @author johnniang
      */
     public static class MultipartFileResource extends ByteArrayResource {
 

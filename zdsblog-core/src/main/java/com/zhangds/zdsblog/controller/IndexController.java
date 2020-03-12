@@ -32,7 +32,7 @@ import java.util.List;
  * Create by zhangds
  * 2020-02-17 14:02
  **/
-@Api(tags = "IndexController", value = "首页索引")
+@Api(tags = "导航管理")
 @RestController
 public class IndexController {
 

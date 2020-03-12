@@ -8,6 +8,7 @@
         <module>zdsblog-core</module>
         <module>zdsblog-common</module>
         <module>zdsblog-generator</module>
+        <module>zdsblog-logging</module>
     </modules>
 
     <parent>
@@ -51,6 +52,18 @@
             </dependency>
 
             <dependency>
+                <groupId>com.zhangds</groupId>
+                <artifactId>zdsblog-logging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zhangds</groupId>
+                <artifactId>zdsblog-generator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-jwt</artifactId>
                 <version>${security.version}</version>
@@ -67,6 +80,25 @@
                 <artifactId>guava</artifactId>
                 <version>18.0</version>
             </dependency>-->
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-jdk8</artifactId>
+                <version>1.2.0.Final</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>1.2.0.Final</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>1.7</version>
+            </dependency>
 
             <dependency>
                 <groupId>cn.hutool</groupId>
@@ -103,6 +135,12 @@
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>3.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>1.21</version>
             </dependency>
 
             <!-- 阿里巴巴fastjson，解析json视图 -->

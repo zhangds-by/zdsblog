@@ -14,7 +14,9 @@ public enum LoginStatus implements BaseEnum {
 
     ENABLE("1", "启用"),
 
-    DISABLE("0", "禁用");
+    DISABLE("0", "禁用"),
+
+    DELETE("-1", "删除");
 
     private String code;
 

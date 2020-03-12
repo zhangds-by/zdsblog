@@ -109,6 +109,16 @@
             <groupId>com.zhangds</groupId>
             <artifactId>zdsblog-security</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.zhangds</groupId>
+            <artifactId>zdsblog-generator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zhangds</groupId>
+            <artifactId>zdsblog-logging</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

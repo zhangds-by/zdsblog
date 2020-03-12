@@ -1,4 +1,4 @@
-package com.zhangds.zdsblog.common.model.interfaces.base;
+package com.zhangds.zdsblog.common.model.interfaces;
 
 import java.util.List;
 

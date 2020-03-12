@@ -1,4 +1,4 @@
-package com.zhangds.zdsblog.common.utils;
+package com.zhangds.zdsblog.common.utils.file;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.io.IoUtil;
@@ -115,7 +115,7 @@ public class FileUtil extends cn.hutool.core.io.FileUtil {
     /**
      * inputStream 转 File
      */
-    static File inputStreamToFile(InputStream ins, String name) throws Exception{
+    public static File inputStreamToFile(InputStream ins, String name) throws Exception{
         File file = new File(System.getProperty("java.io.tmpdir") + File.separator + name);
         if (file.exists()) {
             return file;

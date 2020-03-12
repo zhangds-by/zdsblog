@@ -1,9 +1,5 @@
 package com.zhangds.zdsblog.common.config;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Create by zhangds
  * 2020-03-11 14:09
@@ -12,12 +8,22 @@ public class SystemConfig {
 
     private static String profile;
 
+    private static boolean addressEnabled;
+
     public static String getProfile(){
         return profile;
     }
 
     public static void setProfile(String profile) {
         SystemConfig.profile = profile;
+    }
+
+    public static boolean isAddressEnabled() {
+        return addressEnabled;
+    }
+
+    public static void setAddressEnabled(boolean addressEnabled) {
+        SystemConfig.addressEnabled = addressEnabled;
     }
 
     /**

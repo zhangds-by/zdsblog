@@ -22,4 +22,6 @@ public interface SysContants {
     // 资源映射路径 前缀
     public static final String RESOURCE_PREFIX = "/profile";
 
+    static final String REGION = "内网IP|内网IP";
+
 }

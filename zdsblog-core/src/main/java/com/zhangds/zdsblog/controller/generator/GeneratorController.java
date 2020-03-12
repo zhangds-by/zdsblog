@@ -1,12 +1,14 @@
-package com.zhangds.generator.rest;
+package com.zhangds.zdsblog.controller.generator;
 
 import com.zhangds.generator.domain.ColumnInfo;
 import com.zhangds.generator.service.GenConfigService;
 import com.zhangds.generator.service.GeneratorService;
 import com.zhangds.zdsblog.common.exception.GlobalRequestException;
+import com.zhangds.zdsblog.common.model.support.BaseResponse;
 import com.zhangds.zdsblog.common.utils.PageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,63 +22,60 @@ import java.util.List;
  * @date 2019-01-02
  */
 @RestController
-@RequestMapping("/api/generator")
+@RequestMapping("generator")
 @Api(tags = "代码生成管理")
 public class GeneratorController {
 
-    private final GeneratorService generatorService;
+    @Autowired
+    private GeneratorService generatorService;
 
-    private final GenConfigService genConfigService;
+    @Autowired
+    private GenConfigService genConfigService;
 
-    @Value("${generator.enabled}")
+    @Value("${blog.generator.enabled}")
     private Boolean generatorEnabled;
-
-    public GeneratorController(GeneratorService generatorService, GenConfigService genConfigService) {
-        this.generatorService = generatorService;
-        this.genConfigService = genConfigService;
-    }
-
-    @ApiOperation("查询数据库数据")
-    @GetMapping(value = "/tables/all")
-    public ResponseEntity<Object> getTables(){
-        return new ResponseEntity<>(generatorService.getTables(), HttpStatus.OK);
-    }
 
     @ApiOperation("查询数据库数据")
     @GetMapping(value = "/tables")
-    public ResponseEntity<Object> getTables(@RequestParam(defaultValue = "") String name,
+    public BaseResponse getTables(){
+        return BaseResponse.ok(generatorService.getTables());
+    }
+
+    @ApiOperation("分页查询数据库数据")
+    @GetMapping(value = "/getTablePage")
+    public BaseResponse getTablePage(@RequestParam(defaultValue = "") String name,
                                             @RequestParam(defaultValue = "0")Integer page,
                                             @RequestParam(defaultValue = "10")Integer size){
         int[] startEnd = PageUtil.transToStartEnd(page+1, size);
-        return new ResponseEntity<>(generatorService.getTables(name,startEnd), HttpStatus.OK);
+        return BaseResponse.ok(generatorService.getTables(name, startEnd));
     }
 
     @ApiOperation("查询字段数据")
     @GetMapping(value = "/columns")
-    public ResponseEntity<Object> getTables(@RequestParam String tableName){
+    public BaseResponse getTables(@RequestParam String tableName){
         List<ColumnInfo> columnInfos = generatorService.getColumns(tableName);
-        return new ResponseEntity<>(PageUtil.toPage(columnInfos,columnInfos.size()), HttpStatus.OK);
+        return BaseResponse.ok(PageUtil.toPage(columnInfos,columnInfos.size()));
     }
 
     @ApiOperation("保存字段数据")
-    @PutMapping
-    public ResponseEntity<HttpStatus> save(@RequestBody List<ColumnInfo> columnInfos){
+    @PostMapping("/save")
+    public BaseResponse save(@RequestBody List<ColumnInfo> columnInfos){
         generatorService.save(columnInfos);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return BaseResponse.ok();
     }
 
     @ApiOperation("同步字段数据")
     @PostMapping(value = "sync")
-    public ResponseEntity<HttpStatus> sync(@RequestBody List<String> tables){
+    public BaseResponse sync(@RequestBody List<String> tables){
         for (String table : tables) {
             generatorService.sync(generatorService.getColumns(table), generatorService.query(table));
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return BaseResponse.ok();
     }
 
     @ApiOperation("生成代码")
     @PostMapping(value = "/{tableName}/{type}")
-    public ResponseEntity<Object> generator(@PathVariable String tableName, @PathVariable Integer type, HttpServletRequest request, HttpServletResponse response){
+    public BaseResponse generator(@PathVariable String tableName, @PathVariable Integer type, HttpServletRequest request, HttpServletResponse response){
         if(!generatorEnabled && type == 0){
             throw new GlobalRequestException("此环境不允许生成代码，请选择预览或者下载查看！");
         }
@@ -91,6 +90,6 @@ public class GeneratorController {
                     break;
             default: throw new GlobalRequestException("没有这个选项");
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return BaseResponse.ok();
     }
 }

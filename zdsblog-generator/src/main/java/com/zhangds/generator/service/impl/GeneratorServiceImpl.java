@@ -10,9 +10,11 @@ import com.zhangds.generator.repository.ColumnInfoRepository;
 import com.zhangds.generator.service.GeneratorService;
 import com.zhangds.generator.utils.GenUtil;
 import com.zhangds.zdsblog.common.exception.GlobalRequestException;
-import com.zhangds.zdsblog.common.utils.FileUtil;
+import com.zhangds.zdsblog.common.model.support.BaseResponse;
+import com.zhangds.zdsblog.common.utils.file.FileUtil;
 import com.zhangds.zdsblog.common.utils.PageUtil;
 import com.zhangds.zdsblog.common.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author Zheng Jie
- * @date 2019-01-02
+ * @Author zhangds
+ * @Date 2020/3/12 15:16
+ * @Return 
  */
 @Service
 @SuppressWarnings({"unchecked","all"})
@@ -40,11 +43,8 @@ public class GeneratorServiceImpl implements GeneratorService {
     @PersistenceContext
     private EntityManager em;
 
-    private final ColumnInfoRepository columnInfoRepository;
-
-    public GeneratorServiceImpl(ColumnInfoRepository columnInfoRepository) {
-        this.columnInfoRepository = columnInfoRepository;
-    }
+    @Autowired
+    private ColumnInfoRepository columnInfoRepository;
 
     @Override
     public Object getTables() {
@@ -164,12 +164,12 @@ public class GeneratorServiceImpl implements GeneratorService {
     }
 
     @Override
-    public ResponseEntity<Object> preview(GenConfig genConfig, List<ColumnInfo> columns) {
+    public BaseResponse preview(GenConfig genConfig, List<ColumnInfo> columns) {
         if(genConfig.getId() == null){
             throw new GlobalRequestException("请先配置生成器");
         }
         List<Map<String,Object>> genList =  GenUtil.preview(columns, genConfig);
-        return new ResponseEntity<>(genList, HttpStatus.OK);
+        return BaseResponse.ok(genList);
     }
 
     @Override

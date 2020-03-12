@@ -93,8 +93,25 @@ spring:
     virtual-host: /
     username: guest
 
-
 blog:
+
+  generator:
+    enabled: true
+
+  task:
+    pool:
+      # 核心线程池大小
+      core-pool-size: 10
+      # 最大线程数
+      max-pool-size: 30
+      # 活跃时间
+      keep-alive-seconds: 60
+      # 队列容量
+      queue-capacity: 50
+      #前缀
+      thread-name-prefix: async-
+
+
   security:
     # 免认证静态资源路径
     anon-resources-url:
@@ -122,3 +139,4 @@ blog:
       expiration: 86400
       secret: JWTSecret
       ant-matchers: /*.html,/**/*.html,/**/*.css,/**/*.js,/webSocket/**,image/code,/index/**,/swagger-ui.html,/swagger-resources/**,/webjars/**,/*/api-docs
+

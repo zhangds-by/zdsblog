@@ -2,6 +2,7 @@ package com.zhangds.zdsblog.common.service.impl;
 
 import com.zhangds.zdsblog.common.model.dto.MenuDTO;
 import com.zhangds.zdsblog.common.model.entity.Menu;
+import com.zhangds.zdsblog.common.model.interfaces.mapper.MenuMapper;
 import com.zhangds.zdsblog.common.repository.MenuRepository;
 import com.zhangds.zdsblog.common.repository.RoleMenuRepository;
 import com.zhangds.zdsblog.common.service.MenuService;

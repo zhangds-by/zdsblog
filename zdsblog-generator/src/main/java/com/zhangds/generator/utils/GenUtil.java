@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.template.*;
 import com.zhangds.generator.domain.ColumnInfo;
 import com.zhangds.generator.domain.GenConfig;
-import com.zhangds.zdsblog.common.utils.FileUtil;
+import com.zhangds.zdsblog.common.utils.file.FileUtil;
 import com.zhangds.zdsblog.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;

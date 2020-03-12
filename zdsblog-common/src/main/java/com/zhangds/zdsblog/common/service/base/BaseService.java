@@ -59,5 +59,8 @@ public interface BaseService<DOMAIN, ID> {
     Page<DOMAIN> getPage(BaseQueryCriteria queryCriteria, @NonNull Pageable pageable);
 
     @NonNull
+    List<DOMAIN> queryAll(BaseQueryCriteria queryCriteria);
+
+    @NonNull
     Page<DOMAIN> getPage(@NonNull Pageable pageable);
 }

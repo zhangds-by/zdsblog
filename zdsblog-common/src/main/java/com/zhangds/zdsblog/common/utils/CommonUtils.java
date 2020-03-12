@@ -756,7 +756,7 @@ public class CommonUtils {
     	try{
     		return Integer.parseInt(str);
     	}catch(Exception e){
-//    		log.error(String.format("[%s]字符串解析成Integer失败", str));
+//    		com.zhangds.zdsblog.aop.log.error(String.format("[%s]字符串解析成Integer失败", str));
     	}
     	return null;
     }
@@ -773,7 +773,7 @@ public class CommonUtils {
     	try{
     		return Double.parseDouble(str);
     	}catch(Exception e){
-//    		log.error(String.format("[%s]字符串解析成Double失败", str));
+//    		com.zhangds.zdsblog.aop.log.error(String.format("[%s]字符串解析成Double失败", str));
     	}
     	return null;
     }

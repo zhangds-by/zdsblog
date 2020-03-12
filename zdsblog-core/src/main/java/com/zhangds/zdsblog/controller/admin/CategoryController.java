@@ -5,6 +5,7 @@ import com.zhangds.zdsblog.common.model.entity.Category;
 import com.zhangds.zdsblog.common.model.param.CategoryParam;
 import com.zhangds.zdsblog.common.model.support.BaseResponse;
 import com.zhangds.zdsblog.common.service.CategoryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("category")
+@Api(tags = "类别管理")
 public class CategoryController {
 
     @Autowired
@@ -72,9 +74,15 @@ public class CategoryController {
 
     @ApiModelProperty("批量保存分类")
     @PostMapping("saveInBatch")
-    public BaseResponse<List> saveInBatch(@RequestBody List<Category> list){
+    public BaseResponse saveInBatch(@RequestBody List<Category> list){
         List<Category> categories = categoryService.saveInBatch(list);
         return BaseResponse.ok(categories);
     }
 
+    @ApiModelProperty("删除分类")
+    @PostMapping("/delete/{id:\\d+}")
+    public BaseResponse delete(@PathVariable Long id){
+        categoryService.deleteById(id);
+        return BaseResponse.ok();
+    }
 }

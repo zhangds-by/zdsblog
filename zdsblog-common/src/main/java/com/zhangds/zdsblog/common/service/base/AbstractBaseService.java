@@ -99,6 +99,12 @@ public abstract class AbstractBaseService<DOMAIN, ID> implements BaseService<DOM
     }
 
     @Override
+    public List<DOMAIN> queryAll(BaseQueryCriteria queryCriteria) {
+        return repository.findAll((root, criteriaQuery, criteriaBuilder)
+                -> QueryHelp.getPredicate(root, queryCriteria, criteriaBuilder));
+    }
+
+    @Override
     public Page<DOMAIN> getPage(Pageable pageable) {
         Assert.notNull(pageable, "分页条件不能为空");
         return repository.findAll(pageable);

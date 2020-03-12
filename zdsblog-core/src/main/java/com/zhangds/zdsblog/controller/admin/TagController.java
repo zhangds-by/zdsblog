@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.zhangds.zdsblog.common.service.TagService;
 import com.zhangds.zdsblog.common.model.entity.Tag;
 import com.zhangds.zdsblog.common.model.support.BaseResponse;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -18,6 +19,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("tag")
+@Api(tags = "标签管理")
 public class TagController {
 
     @Autowired

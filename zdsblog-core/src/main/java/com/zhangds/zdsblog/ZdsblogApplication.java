@@ -12,10 +12,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableTransactionManagement
 @EnableJpaAuditing
-@EntityScan(basePackages = "com.zhangds.zdsblog.*")
-@EnableJpaRepositories(basePackages = "com.zhangds.zdsblog.*")
-@ComponentScan(basePackages = {"com.zhangds.zdsblog.*", "com.zhangds.zdsblog.common.*", "com.zhangds.zdsblog.security.*",
-                        "com.zhangds.generator.*"})
+@EntityScan(basePackages = {"com.zhangds.zdsblog.*", "com.zhangds.generator.*"})
+@EnableJpaRepositories(basePackages = {"com.zhangds.zdsblog.*", "com.zhangds.generator.*"})
+@ComponentScan(basePackages = {"com.zhangds.zdsblog.*", "com.zhangds.zdsblog.common.**",
+        "com.zhangds.zdsblog.security.*", "com.zhangds.generator.**", "com.zhangds.zdsblog.aop.**"})
 @SpringBootApplication
 public class ZdsblogApplication {
 

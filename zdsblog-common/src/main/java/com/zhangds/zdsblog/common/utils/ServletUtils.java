@@ -1,6 +1,7 @@
 package com.zhangds.zdsblog.common.utils;
 
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,6 +55,7 @@ public class ServletUtils
      */
     public static HttpServletRequest getRequest()
     {
+        //return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         return getRequestAttributes().getRequest();
     }
 

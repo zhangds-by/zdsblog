@@ -7,6 +7,7 @@ import com.zhangds.zdsblog.common.model.entity.*;
 import com.zhangds.zdsblog.common.model.support.BaseResponse;
 import com.zhangds.zdsblog.common.service.*;
 import com.zhangds.zdsblog.common.utils.CommonUtils;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/article")
+@Api(tags = "文章管理")
 public class ArticleController {
 
     @Autowired

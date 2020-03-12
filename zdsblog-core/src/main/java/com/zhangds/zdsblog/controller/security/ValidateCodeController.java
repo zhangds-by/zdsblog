@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.image.BufferedImage;
@@ -17,7 +18,8 @@ import java.awt.image.BufferedImage;
  * 2020-03-06 14:38
  **/
 @RestController
-@Api(tags = "ValidateCodeController", value = "安全校验接口")
+@Api(tags = "验证码接口")
+@RequestMapping("validateCode")
 public class ValidateCodeController {
 
     @Autowired

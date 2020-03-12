@@ -1,6 +1,7 @@
 package com.zhangds.zdsblog.common.model.entity;
 
 import com.zhangds.zdsblog.common.model.enums.CommentStatus;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
  **/
 @Data
 @Entity
+@ApiModel("评论")
 @Table(name = "comment")
 public class Comment {
 

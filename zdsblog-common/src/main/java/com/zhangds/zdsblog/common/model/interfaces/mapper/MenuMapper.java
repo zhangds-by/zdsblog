@@ -1,8 +1,8 @@
-package com.zhangds.zdsblog.common.model.interfaces;
+package com.zhangds.zdsblog.common.model.interfaces.mapper;
 
 import com.zhangds.zdsblog.common.model.dto.MenuDTO;
 import com.zhangds.zdsblog.common.model.entity.Menu;
-import com.zhangds.zdsblog.common.model.interfaces.base.BaseMapper;
+import com.zhangds.zdsblog.common.model.interfaces.BaseMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

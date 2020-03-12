@@ -2,6 +2,7 @@ package com.zhangds.generator.service;
 
 import com.zhangds.generator.domain.ColumnInfo;
 import com.zhangds.generator.domain.GenConfig;
+import com.zhangds.zdsblog.common.model.support.BaseResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 
@@ -63,7 +64,7 @@ public interface GeneratorService {
      * @param columns 字段信息
      * @return /
      */
-    ResponseEntity<Object> preview(GenConfig genConfig, List<ColumnInfo> columns);
+    BaseResponse preview(GenConfig genConfig, List<ColumnInfo> columns);
 
     /**
      * 打包下载

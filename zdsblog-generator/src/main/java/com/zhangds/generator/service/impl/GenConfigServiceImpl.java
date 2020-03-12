@@ -4,29 +4,23 @@ import com.zhangds.generator.domain.GenConfig;
 import com.zhangds.generator.repository.GenConfigRepository;
 import com.zhangds.generator.service.GenConfigService;
 import com.zhangds.zdsblog.common.utils.StringUtils;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 
 /**
- * @author Zheng Jie
- * @date 2019-01-14
+ * @Author zhangds
+ * @Date 2020/3/12 15:16
+ * @Return 
  */
 @Service
-@CacheConfig(cacheNames = "genConfig")
 public class GenConfigServiceImpl implements GenConfigService {
 
-    private final GenConfigRepository genConfigRepository;
-
-    public GenConfigServiceImpl(GenConfigRepository genConfigRepository) {
-        this.genConfigRepository = genConfigRepository;
-    }
+    @Autowired
+    private GenConfigRepository genConfigRepository;
 
     @Override
-    @Cacheable(key = "#p0")
     public GenConfig find(String tableName) {
         GenConfig genConfig = genConfigRepository.findByTableName(tableName);
         if(genConfig == null){
@@ -36,7 +30,6 @@ public class GenConfigServiceImpl implements GenConfigService {
     }
 
     @Override
-    @CachePut(key = "#p0")
     public GenConfig update(String tableName, GenConfig genConfig) {
         // 如果 api 路径为空，则自动生成路径
         if(StringUtils.isBlank(genConfig.getApiPath())){

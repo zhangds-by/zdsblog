@@ -4,7 +4,7 @@ import com.zhangds.zdsblog.common.model.dto.MenuDTO;
 import com.zhangds.zdsblog.common.model.dto.MenuQueryCriteria;
 import com.zhangds.zdsblog.common.model.entity.Menu;
 import com.zhangds.zdsblog.common.model.entity.User;
-import com.zhangds.zdsblog.common.model.interfaces.MenuMapper;
+import com.zhangds.zdsblog.common.model.interfaces.mapper.MenuMapper;
 import com.zhangds.zdsblog.common.model.support.BaseResponse;
 import com.zhangds.zdsblog.common.service.MenuService;
 import com.zhangds.zdsblog.controller.BaseController;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Create by zhangds
  * 2020-03-10 17:02
  **/
-@Api(tags = "MenuController", value = "菜单管理")
+@Api(tags = "菜单管理")
 @RestController
 @RequestMapping("menu")
 public class MenuController extends BaseController {
@@ -92,13 +92,12 @@ public class MenuController extends BaseController {
     }
 
     @ApiOperation("获取用户拥有菜单树(修改分配菜单权限使用)")
-    @GetMapping("/buildTree")
+    @GetMapping("/getMenus")
     public BaseResponse getMenus(){
         User user = super.getCurrentUser();
         List<Menu> menuList = menuService.getListByUserId(user.getUserId(), null);
         List<MenuDTO> menuDTOList = menuList.stream().map(menuMapper::toDto).collect(Collectors.toList());
         return BaseResponse.ok(menuService.buildTree(menuDTOList));
     }
-
 
 }
